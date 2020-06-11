@@ -267,5 +267,7 @@ public class Enemy extends Rectangle {
 
     public void render(Graphics g) {
         g.drawImage(Texture.ghost, x, y, width, height, null);
+//        g.setColor(Color.red);
+//        g.fillRect(x, y, 32, 32);
     }
 }

@@ -10,7 +10,7 @@ public class SpriteSheet {
         try{
             sheet = ImageIO.read(getClass().getResource(path));
         } catch(IOException e){
-            System.out.println("Failed to load image");
+            System.out.println("Błąd podczas ładowania pliku");
         }
     }
 

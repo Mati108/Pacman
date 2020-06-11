@@ -1,7 +1,4 @@
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -23,6 +20,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public static Level level;
     public static SpriteSheet spritesheet;
 
+    public static final int PAUSE_SCREEN = 0, GAME = 1;
+    public static int STATE = -1;
+
+    public boolean isEnter = false;
+
     public Game() {
         Dimension dimension = new Dimension(Game.WIDTH, Game.HEIGHT);
         setPreferredSize(dimension);
@@ -30,11 +32,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
         setMaximumSize(dimension);
 
         addKeyListener(this);
-        player = new Player(Game.WIDTH / 2, Game.HEIGHT / 2);
-        level = new Level("map2.png");
-        spritesheet = new SpriteSheet("figures.png");
 
-        new Texture();
+        STATE = PAUSE_SCREEN;
     }
 
     public synchronized void start() {
@@ -57,8 +56,21 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     private void tick() {
-        player.tick();
-        level.tick();
+        if(STATE == GAME) {
+            player.tick();
+            level.tick();
+        }else if(STATE == PAUSE_SCREEN){
+            if(isEnter){
+                player = new Player(Game.WIDTH / 2, Game.HEIGHT / 2);
+                level = new Level("map2.png");
+                spritesheet = new SpriteSheet("figures.png");
+
+                new Texture();
+
+                isEnter = false;
+                STATE = GAME;
+            }
+        }
     }
 
     private void render() {
@@ -70,8 +82,22 @@ public class Game extends Canvas implements Runnable, KeyListener {
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
-        player.render(g);
-        level.render(g);
+
+        if(STATE == GAME) {
+            player.render(g);
+            level.render(g);
+        } else if(STATE == PAUSE_SCREEN){
+            int boxWidth = 525;
+            int boxHeight = 200;
+            int xx = Game.WIDTH / 2 - boxWidth / 2;
+            int yy = Game.HEIGHT / 2 - boxHeight / 2;
+            g.setColor(new Color(75, 0, 150));
+            g.fillRect(xx, yy, boxWidth, boxHeight);
+
+            g.setColor(Color.white);
+            g.setFont(new Font(Font.DIALOG, Font.BOLD, 26));
+            g.drawString("Naciśnij enter, aby rozpocząć nową grę", xx + 15, yy + 108);
+        }
         g.dispose();
         bs.show();
     }
@@ -123,16 +149,18 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = true;
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = true;
-        if(e.getKeyCode() == KeyEvent.VK_UP) player.up = true;
-        if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = true;
+
+        if(STATE == GAME) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = true;
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) player.left = true;
+            if (e.getKeyCode() == KeyEvent.VK_UP) player.up = true;
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) player.down = true;
+        }else if(STATE == PAUSE_SCREEN){
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                isEnter = true;
+            }
+        }
     }
 
     @Override
@@ -141,6 +169,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = false;
         if(e.getKeyCode() == KeyEvent.VK_UP) player.up = false;
         if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = false;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
     }
 
 }

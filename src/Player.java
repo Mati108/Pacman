@@ -39,9 +39,9 @@ public class Player extends Rectangle {
         }
 
         for(int i = 0; i < Game.level.enemies.size(); i++){
-            Enemy en = Game.level.enemies.get(i);
-            if(en.intersects(this)){
-                System.exit(1);
+            if(this.intersects(Game.level.enemies.get(i))) {
+                // Menu system
+                Game.STATE = Game.PAUSE_SCREEN;
             }
         }
     }
@@ -65,5 +65,7 @@ public class Player extends Rectangle {
 
     public void render(Graphics g) {
         g.drawImage(Texture.player, x, y, width,height, null);
+//        g.setColor(Color.yellow);
+//        g.fillRect(x, y, width, height);
     }
 }
