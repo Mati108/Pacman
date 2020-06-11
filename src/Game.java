@@ -75,7 +75,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     @Override
     public void run() {
         requestFocus();
-        // Dane opisujące prędkość gry
+        // Data describing speed of the game
         int fps = 0;
         double timer = System.currentTimeMillis();
         long lastTime = System.nanoTime();
@@ -105,7 +105,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public static void main(String[] args) {
         Game game = new Game();
-        //new ImageViewer();
         JFrame frame = new JFrame();
         frame.setTitle(Game.TITLE);
         frame.add(game);

@@ -20,8 +20,7 @@ public class Level {
         apples = new ArrayList<>();
         enemies = new ArrayList<>();
         try {
-            System.out.print("Try");
-            BufferedImage map = ImageIO.read(getClass().getResource("map.png"));
+            BufferedImage map = ImageIO.read(getClass().getResource(path));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
