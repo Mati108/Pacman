@@ -22,17 +22,39 @@ public class Player extends Rectangle {
             y -= speed;
         if (down && canMove(x, y + speed))
             y += speed;
+
+        Level level = Game.level;
+
+        for (int i = 0; i < level.apples.size(); i++) {
+            if (this.intersects(level.apples.get(i))) {
+                level.apples.remove(i);
+                break;
+            }
+        }
+        if (level.apples.size() == 0) {
+            // Game end, we win!
+            Game.player = new Player(0, 0);
+            Game.level = new Level("map.png");
+            return;
+        }
+
+        for(int i = 0; i < Game.level.enemies.size(); i++){
+            Enemy en = Game.level.enemies.get(i);
+            if(en.intersects(this)){
+                System.exit(1);
+            }
+        }
     }
 
-    private boolean canMove(int nextx, int nexty){
+    private boolean canMove(int nextx, int nexty) {
 
         Rectangle bounds = new Rectangle(nextx, nexty, width, height);
         Level level = Game.level;
 
-        for(int xx = 0; xx < level.tiles.length; xx++){
-            for(int yy = 0; yy < level.tiles[0].length; yy++){
-                if(level.tiles[xx][yy] != null){
-                    if(bounds.intersects(level.tiles[xx][yy])){
+        for (int xx = 0; xx < level.tiles.length; xx++) {
+            for (int yy = 0; yy < level.tiles[0].length; yy++) {
+                if (level.tiles[xx][yy] != null) {
+                    if (bounds.intersects(level.tiles[xx][yy])) {
                         return false;
                     }
                 }
@@ -42,8 +64,6 @@ public class Player extends Rectangle {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillRect(x, y, 32, 32);
+        g.drawImage(Texture.player, x, y, width,height, null);
     }
-
 }
