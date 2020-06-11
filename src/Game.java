@@ -48,6 +48,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         isRunning = true;
         thread = new Thread(this);
         thread.start();
+        System.out.println("Watek GAME");
     }
 
     public synchronized void stop() {

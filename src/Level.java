@@ -38,11 +38,11 @@ public class Level {
                         // Player
                         Game.player.x = xx * 32;
                         Game.player.y = yy * 32;
-                    } else if (val == 0xFFFF0000){
+                    } else if (val == 0xFFFF0000) {
                         // Enemy
-                        enemies.add(new Enemy(xx*32, yy*32));
-                    } else{
-                        apples.add(new Apple(xx*32, yy*32));
+                        enemies.add(new Enemy(xx * 32, yy * 32));
+                    } else {
+                        apples.add(new Apple(xx * 32, yy * 32));
                     }
                 }
             }
@@ -52,8 +52,9 @@ public class Level {
             System.exit(1);
         }
     }
-    public void tick(){
-        for (int i = 0; i < enemies.size(); i++){
+
+    public void tick() {
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).tick();
         }
     }
@@ -64,10 +65,10 @@ public class Level {
                 if (tiles[x][y] != null) tiles[x][y].render(g);
             }
         }
-        for (int i = 0; i < apples.size(); i++){
+        for (int i = 0; i < apples.size(); i++) {
             apples.get(i).render(g);
         }
-        for (int i = 0; i < enemies.size(); i++){
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).render(g);
         }
     }

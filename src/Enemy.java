@@ -23,8 +23,12 @@ public class Enemy extends Rectangle {
 
     private int lastDir = -1;
 
+    Thread thread;
+
 
     public Enemy(int x, int y) {
+        thread = new Thread();
+        thread.start();
         randomGen = new Random();
         setBounds(x, y, 32, 32);
         dir = randomGen.nextInt(4);

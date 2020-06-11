@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Tile extends Rectangle{
+public class Tile extends Rectangle {
 
     private static final long serialVersionUID = 1L;
 

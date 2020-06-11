@@ -13,7 +13,11 @@ public class Player extends Rectangle {
 
     private int lastDir = 1;
 
+    Thread thread;
+
     public Player(int x, int y) {
+        thread = new Thread();
+        thread.start();
         setBounds(x, y, 32, 32);
     }
 
