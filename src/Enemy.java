@@ -19,7 +19,7 @@ public class Enemy extends Rectangle {
 
     private int targetTime = 60 * 4;
 
-    private int spd = 1;
+    private int spd = 2;
 
     private int lastDir = -1;
 
@@ -34,8 +34,7 @@ public class Enemy extends Rectangle {
         if (state == random) {
             if (dir == right) {
                 if (canMove(x + spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x += spd;
                     }
                 } else {
@@ -44,8 +43,7 @@ public class Enemy extends Rectangle {
 
             } else if (dir == left) {
                 if (canMove(x - spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x -= spd;
                     }
                 } else {
@@ -54,8 +52,7 @@ public class Enemy extends Rectangle {
 
             } else if (dir == up) {
                 if (canMove(x, y - spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y -= spd;
                     }
                 } else {
@@ -64,8 +61,7 @@ public class Enemy extends Rectangle {
 
             } else if (dir == down) {
                 if (canMove(x, y + spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y += spd;
                     }
                 } else {
@@ -87,8 +83,7 @@ public class Enemy extends Rectangle {
 
             if (x < Game.player.x) {
                 if (canMove(x + spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x += spd;
                     }
                     move = true;
@@ -97,8 +92,7 @@ public class Enemy extends Rectangle {
             }
             if (x > Game.player.x) {
                 if (canMove(x - spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x -= spd;
                     }
                     move = true;
@@ -107,8 +101,7 @@ public class Enemy extends Rectangle {
             }
             if (y < Game.player.y) {
                 if (canMove(x, y + spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y += spd;
                     }
                     move = true;
@@ -117,8 +110,7 @@ public class Enemy extends Rectangle {
             }
             if (y > Game.player.y) {
                 if (canMove(x, y - spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y -= spd;
                     }
                     move = true;
@@ -144,96 +136,84 @@ public class Enemy extends Rectangle {
             if (lastDir == right) {
                 if (y < Game.player.y) {
                     if (canMove(x, y + spd)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             y += spd;
                         }
                         state = smart;
                     }
                 } else {
                     if (canMove(x, y - spd)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             y -= spd;
                         }
                         state = smart;
                     }
                 }
                 if (canMove(x + spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x += spd;
                     }
                 }
             } else if (lastDir == left) {
                 if (y < Game.player.y) {
                     if (canMove(x, y + spd)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             y += spd;
                         }
                         state = smart;
                     }
                 } else {
                     if (canMove(x, y - spd)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             y -= spd;
                         }
                         state = smart;
                     }
                 }
                 if (canMove(x - spd, y)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         x -= spd;
                     }
                 }
             } else if (lastDir == up) {
                 if (x < Game.player.x) {
                     if (canMove(x + spd, y)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             x += spd;
                         }
                         state = smart;
                     }
                 } else {
                     if (canMove(x, y - spd)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             x -= spd;
                         }
                         state = smart;
                     }
                 }
                 if (canMove(x, y - spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y -= spd;
                     }
                 }
             } else if (lastDir == down) {
                 if (x < Game.player.x) {
                     if (canMove(x + spd, y)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             x += spd;
                         }
                         state = smart;
                     }
                 } else {
                     if (canMove(x - spd, y)) {
-                        if(randomGen.nextInt(100) < 50)
-                        {
+                        if (randomGen.nextInt(100) < 50) {
                             x -= spd;
                         }
                         state = smart;
                     }
                 }
                 if (canMove(x, y + spd)) {
-                    if(randomGen.nextInt(100) < 50)
-                    {
+                    if (randomGen.nextInt(100) < 50) {
                         y += spd;
                     }
                 }
@@ -267,7 +247,5 @@ public class Enemy extends Rectangle {
 
     public void render(Graphics g) {
         g.drawImage(Texture.ghost, x, y, width, height, null);
-//        g.setColor(Color.red);
-//        g.fillRect(x, y, 32, 32);
     }
 }
