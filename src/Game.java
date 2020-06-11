@@ -25,6 +25,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public boolean isEnter = false;
 
+    private int time = 0;
+    private int targetFrames = 44;
+    private boolean showText = true;
+
     public Game() {
         Dimension dimension = new Dimension(Game.WIDTH, Game.HEIGHT);
         setPreferredSize(dimension);
@@ -60,6 +64,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
             player.tick();
             level.tick();
         }else if(STATE == PAUSE_SCREEN){
+            time++;
+            if(time == targetFrames){
+                time = 0;
+                if(showText){
+                    showText = false;
+                }else{
+                    showText = true;
+                }
+            }
             if(isEnter){
                 player = new Player(Game.WIDTH / 2, Game.HEIGHT / 2);
                 level = new Level("map2.png");
@@ -96,7 +109,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
             g.setColor(Color.white);
             g.setFont(new Font(Font.DIALOG, Font.BOLD, 26));
-            g.drawString("Naciśnij enter, aby rozpocząć nową grę", xx + 15, yy + 108);
+            if(showText) {
+                g.drawString("Naciśnij enter, aby rozpocząć nową grę", xx + 15, yy + 108);
+            }
         }
         g.dispose();
         bs.show();

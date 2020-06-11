@@ -19,7 +19,7 @@ public class Enemy extends Rectangle {
 
     private int targetTime = 60 * 4;
 
-    private int spd = 3;
+    private int spd = 1;
 
     private int lastDir = -1;
 

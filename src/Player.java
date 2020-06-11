@@ -42,6 +42,7 @@ public class Player extends Rectangle {
             if(this.intersects(Game.level.enemies.get(i))) {
                 // Menu system
                 Game.STATE = Game.PAUSE_SCREEN;
+                return;
             }
         }
     }
